@@ -22,6 +22,7 @@ public class TweetService {
      * Create a tweet in database and return it
      * @param tweetObject The tweet object that need to saved in database
      * @return The newly saved tweet
+     * @throws InformationInvalidException
      */
     public Tweet createTweet(Tweet tweetObject) {
         try {

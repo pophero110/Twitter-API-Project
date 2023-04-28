@@ -22,7 +22,6 @@ public class User {
     private String password;
 
     @OneToMany
-    @JsonIgnore
     private List<Tweet> tweets;
 
     public User() {

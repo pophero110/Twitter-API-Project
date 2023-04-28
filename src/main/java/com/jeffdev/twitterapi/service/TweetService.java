@@ -71,4 +71,20 @@ public class TweetService {
             throw new InformationNotFoundException("Tweet is not found with id " + tweetId);
         }
     }
+
+    /**
+     * delete a tweet based on tweet id
+     * @param tweetId the id of the tweet
+     * @return deleted tweet
+     * @throws InformationNotFoundException
+     */
+    public Tweet deleteTweet(Long tweetId) {
+        Optional<Tweet> tweet = tweetRepository.findById(tweetId);
+        if (tweet.isPresent()) {
+            tweetRepository.delete(tweet.get());
+            return tweet.get();
+        } else {
+            throw new InformationNotFoundException("Tweet is not found with id " + tweetId);
+        }
+    }
 }

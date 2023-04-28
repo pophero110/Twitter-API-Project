@@ -34,4 +34,27 @@ public class TweetController {
     public List<Tweet> getTweets() {
         return tweetService.getTweets();
     }
+
+    /**
+     * update a specific tweet based on tweet id and return updated tweet
+     *
+     * @param tweetId     the id of the tweet
+     * @param tweetObject the object that contains attributes that is needed to be updated
+     * @return updated tweet
+     */
+    @PutMapping(path = "/{tweetId}")
+    public Tweet updateTweet(@PathVariable Long tweetId, @RequestBody Tweet tweetObject) {
+        return tweetService.updateTweet(tweetId, tweetObject);
+    }
+
+    /**
+     * delete a specific tweet based on tweet id and return deleted tweet
+     *
+     * @param tweetId the id of the tweet
+     * @return deleted tweet
+     */
+    @DeleteMapping(path = "/{tweetId}")
+    public Tweet deleteTweet(@PathVariable Long tweetId) {
+        return tweetService.deleteTweet(tweetId);
+    }
 }

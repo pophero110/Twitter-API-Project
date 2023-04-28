@@ -6,6 +6,8 @@ import com.jeffdev.twitterapi.repository.TweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TweetService {
 
@@ -34,5 +36,13 @@ public class TweetService {
         } catch (Exception e) {
             throw new InformationInvalidException(e.getMessage());
         }
+    }
+
+    /**
+     * Get a list of tweets sorted by created_at desc
+     * @return a list of tweets or an empty list
+     */
+    public List<Tweet> getTweets() {
+        return tweetRepository.findAllByOrderByCreatedAtDesc();
     }
 }

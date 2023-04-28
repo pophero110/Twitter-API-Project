@@ -2,12 +2,14 @@ package com.jeffdev.twitterapi.model;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
 @Table(name = "tweets")
+@EntityListeners(AuditingEntityListener.class)
 public class Tweet {
     @Id
     @Column
@@ -20,6 +22,7 @@ public class Tweet {
 
 
     // Source: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#auditing.annotations
+    // Source: https://www.logicbig.com/tutorials/spring-framework/spring-data/basic-auditing.html
     @CreatedDate
     private Instant createdAt;
 

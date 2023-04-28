@@ -42,6 +42,7 @@ public class User {
         this.id = id;
     }
 
+    @JsonIgnore
     public String getEmailAddress() {
         return emailAddress;
     }

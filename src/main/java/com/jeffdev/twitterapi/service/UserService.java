@@ -3,8 +3,19 @@ package com.jeffdev.twitterapi.service;
 import com.jeffdev.twitterapi.exception.InformationExistException;
 import com.jeffdev.twitterapi.exception.InformationInvalidException;
 import com.jeffdev.twitterapi.model.User;
+import com.jeffdev.twitterapi.model.request.LoginRequest;
+import com.jeffdev.twitterapi.model.response.LoginResponse;
 import com.jeffdev.twitterapi.repository.UserRepository;
+import com.jeffdev.twitterapi.security.JWTUtils;
+import com.jeffdev.twitterapi.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,9 +24,21 @@ import java.util.Optional;
 public class UserService {
     private UserRepository userRepository;
 
+    private PasswordEncoder passwordEncoder;
+
+    private JWTUtils jwtUtils;
+
+    private AuthenticationManager authenticationManager;
+    private MyUserDetails myUserDetails;
+
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder, JWTUtils jwtUtils, @Lazy AuthenticationManager authenticationManager,
+                       @Lazy MyUserDetails myUserDetails) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtils = jwtUtils;
+        this.authenticationManager = authenticationManager;
+        this.myUserDetails = myUserDetails;
     }
 
     /**
@@ -34,8 +57,36 @@ public class UserService {
             if (userObject.getPassword().isBlank()) {
                 throw new InformationInvalidException("Password can not be empty or only contains space character");
             } else {
+                userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
                 return userRepository.save(userObject);
             }
+        }
+    }
+
+    /**
+     * find a user by an email address
+     * @param email the email dress used to find the user
+     * @return found user
+     */
+    public Optional<User> findUserByEmailAddress(String email) {
+        return userRepository.findUserByEmailAddress(email);
+    }
+
+    /**
+     * authenticate a user by email and password
+     * @param loginRequest contains the email and password of the user
+     * @return JWT
+     */
+    public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
+        try {
+            Authentication authentication = authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            myUserDetails = (MyUserDetails) authentication.getPrincipal();
+            final String JWT = jwtUtils.generateJwtToken(myUserDetails);
+            return ResponseEntity.ok(new LoginResponse(JWT));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new LoginResponse("Error: Username or password is incorrect"));
         }
     }
 }

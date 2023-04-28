@@ -1,7 +1,7 @@
 package com.jeffdev.twitterapi.model;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -26,7 +26,7 @@ public class Tweet {
     @CreatedDate
     private Instant createdAt;
 
-    @LastModifiedBy
+    @LastModifiedDate
     private Instant updatedAt;
 
     public Tweet() {

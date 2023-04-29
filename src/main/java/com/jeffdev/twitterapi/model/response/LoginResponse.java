@@ -1,5 +1,6 @@
 package com.jeffdev.twitterapi.model.response;
 
+import com.jeffdev.twitterapi.model.Profile;
 import com.jeffdev.twitterapi.model.Tweet;
 
 import java.util.List;
@@ -10,33 +11,28 @@ import java.util.List;
 public class LoginResponse {
     private String token;
     private List<Tweet> tweets;
+    private Profile profile;
 
     /**
-     * Creates a new instance of LoginResponse with the specified message.
+     * Creates a new instance of LoginResponse with the token, a list of tweets and a user's profile.
      *
-     * @param token The response message.
+     * @param token The JWT
+     * @param tweets User's tweets
+     * @param profile User's profile
      */
-    public LoginResponse(String token, List<Tweet> tweets) {
+    public LoginResponse(String token, List<Tweet> tweets, Profile profile) {
         this.token = token;
         this.tweets = tweets;
+        this.profile = profile;
     }
 
     /**
-     * Returns the response message.
+     * Returns the token.
      *
-     * @return The response message.
+     * @return The token.
      */
     public String getToken() {
         return token;
-    }
-
-    /**
-     * Sets the response message.
-     *
-     * @param token The new response message.
-     */
-    public void setToken(String token) {
-        this.token = token;
     }
 
     /**
@@ -46,5 +42,11 @@ public class LoginResponse {
     public List<Tweet> getTweets() {
         return tweets;
     }
+
+    /**
+     * Return user's profile
+     * @return a user's profile
+     */
+    public Profile getProfile() {return profile;}
 }
 

@@ -14,13 +14,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 public class ThreadService {
     private ThreadRepository threadRepository;
     private TweetRepository tweetRepository;
-    private Logger logger = Logger.getLogger(ThreadService.class.getName());
 
     public static User getCurrentLoggedInUser() {
         MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -39,15 +37,16 @@ public class ThreadService {
 
     /**
      * Create a new tweet and add it to a thread
-     * If the content in the given Tweet object is blank, an InformationInvalidException will be thrown
-     * If the tweet can not be found by the given tweet id, an InformationNotFoundException will be thrown
+     * <p>
      * If the tweet does not belong to any thread and has child tweets, add the new tweet to the thread that contains child tweets
      * Else create a new thread and add the new tweet to it
+     * </p>
+     *
      * @param tweetId    the id of the tweet that reply to
      * @param replyTweet the Tweet object that need to be created
      * @return Thread with tweets that belongs to the thread
-     * @throws InformationInvalidException
-     * @throws InformationNotFoundException
+     * @throws InformationInvalidException  If the content in the given Tweet object is blank
+     * @throws InformationNotFoundException If the tweet can not be found by the given tweet id
      */
     public Tweet createThreadTweet(Long tweetId, Tweet replyTweet) {
         if (replyTweet.getContent().isBlank()) {
@@ -75,11 +74,10 @@ public class ThreadService {
 
     /**
      * Find a thread by the given thread id and return the tweets in the thread
-     * If the thread can not be found by the thread id, an InformationNotFoundException will be thrown
      *
      * @param threadId the id of the thread
      * @return a list of tweets
-     * @throws InformationNotFoundException
+     * @throws InformationNotFoundException If the thread can not be found by the thread id
      */
     public List<Tweet> getTweetsByThreadId(Long threadId) {
         Optional<Thread> thread = threadRepository.findById(threadId);

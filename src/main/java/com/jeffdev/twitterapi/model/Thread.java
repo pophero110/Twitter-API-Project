@@ -35,10 +35,6 @@ public class Thread {
         return tweets;
     }
 
-    public void setTweets(List<Tweet> tweets) {
-        this.tweets = tweets;
-    }
-
     public Long getId() {
         return id;
     }

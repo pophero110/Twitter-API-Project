@@ -4,6 +4,7 @@ import com.jeffdev.twitterapi.exception.InformationExistException;
 import com.jeffdev.twitterapi.exception.InformationInvalidException;
 import com.jeffdev.twitterapi.model.User;
 import com.jeffdev.twitterapi.model.request.LoginRequest;
+import com.jeffdev.twitterapi.model.request.RegisterRequest;
 import com.jeffdev.twitterapi.model.response.LoginResponse;
 import com.jeffdev.twitterapi.repository.UserRepository;
 import com.jeffdev.twitterapi.security.JWTUtils;
@@ -22,13 +23,13 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    private JWTUtils jwtUtils;
+    private final JWTUtils jwtUtils;
 
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     private MyUserDetails myUserDetails;
 
     @Autowired
@@ -44,21 +45,21 @@ public class UserService {
     /**
      * create a user with a unique email and non-blank password
      *
-     * @param userObject the object that contains the email and password
+     * @param registerRequest the object that contains the email and password
      * @return created user
-     * @throws InformationExistException
-     * @throws InformationInvalidException
+     * @throws InformationExistException if the email is already existed
+     * @throws InformationInvalidException if the password is blank
      */
-    public User createUser(User userObject) {
-        Optional<User> user = userRepository.findUserByEmailAddress(userObject.getEmailAddress());
+    public User createUser(RegisterRequest registerRequest) {
+        Optional<User> user = userRepository.findUserByEmailAddress(registerRequest.getEmail());
         if (user.isPresent()) {
-            throw new InformationExistException("The email address " + userObject.getEmailAddress() + " is already existed");
+            throw new InformationExistException("The email address " + registerRequest.getEmail() + " is already existed");
         } else {
-            if (userObject.getPassword().isBlank()) {
+            if (registerRequest.getPassword().isBlank()) {
                 throw new InformationInvalidException("Password can not be empty or only contains space character");
             } else {
-                userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
-                return userRepository.save(userObject);
+                User newUser = new User(null,registerRequest.getEmail(), passwordEncoder.encode(registerRequest.getPassword()));
+                return userRepository.save(newUser);
             }
         }
     }
@@ -84,9 +85,11 @@ public class UserService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             myUserDetails = (MyUserDetails) authentication.getPrincipal();
             final String JWT = jwtUtils.generateJwtToken(myUserDetails);
-            return ResponseEntity.ok(new LoginResponse(JWT, myUserDetails.getUser().getTweets(), myUserDetails.getUser().getProfile()));
+            // ResponseEntity represents the whole HTTP response: status code, headers, and body
+            // https://www.baeldung.com/spring-response-entity
+            return ResponseEntity.ok(new LoginResponse(JWT, myUserDetails.getUser().getProfile()));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new LoginResponse("Error: Username or password is incorrect", null, null));
+            return ResponseEntity.badRequest().body(new LoginResponse("Error: Username or password is incorrect", null));
         }
     }
 }

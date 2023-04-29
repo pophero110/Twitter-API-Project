@@ -17,4 +17,7 @@ public interface TweetRepository extends JpaRepository<Tweet, Long> {
 
     // check whether a tweet has any child tweets
     boolean existsByParentId(Long parentId);
+
+    // find all tweets posted by a user
+    List<Tweet> findAllByUserIdOrderByCreatedAtDesc(Long userId);
 }

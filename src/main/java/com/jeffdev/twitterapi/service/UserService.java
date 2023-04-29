@@ -84,9 +84,9 @@ public class UserService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             myUserDetails = (MyUserDetails) authentication.getPrincipal();
             final String JWT = jwtUtils.generateJwtToken(myUserDetails);
-            return ResponseEntity.ok(new LoginResponse(JWT, myUserDetails.getUser().getTweets()));
+            return ResponseEntity.ok(new LoginResponse(JWT, myUserDetails.getUser().getTweets(), myUserDetails.getUser().getProfile()));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new LoginResponse("Error: Username or password is incorrect", null));
+            return ResponseEntity.badRequest().body(new LoginResponse("Error: Username or password is incorrect", null, null));
         }
     }
 }

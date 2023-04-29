@@ -61,11 +61,31 @@ public class TweetController {
 
     /**
      * return a tweet by given tweet id
+     *
      * @param tweetId the given tweet id
      * @return tweet
      */
     @GetMapping("/{tweetId}")
     public Tweet getTweet(@PathVariable Long tweetId) {
         return tweetService.getTweet(tweetId);
+    }
+
+    /**
+     * return a list of tweets that belongs to the user of given user id
+     * @param userId the given user id
+     * @return a list of tweets
+     */
+    @GetMapping("/users/{userId}")
+    public List<Tweet> getTweetsByUser(@PathVariable Long userId) {
+        return tweetService.getTweetsByUser(userId);
+    }
+
+    /**
+     * return current user's tweets
+     * @return a list of tweets
+     */
+    @GetMapping("/me")
+    public List<Tweet> getMyTweets() {
+        return tweetService.getMyTweets();
     }
 }

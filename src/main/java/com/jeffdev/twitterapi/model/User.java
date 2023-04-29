@@ -2,6 +2,8 @@ package com.jeffdev.twitterapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +24,7 @@ public class User {
     private String password;
 
     @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Tweet> tweets;
 
     public User() {

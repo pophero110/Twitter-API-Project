@@ -27,7 +27,13 @@ public class User {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Tweet> tweets;
 
+    // The value of mappedBy is the name of the association-mapping attribute on the owning side
+    @OneToOne(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Profile profile;
+
     public User() {
+
     }
 
     public User(Long id, String emailAddress, String password) {
@@ -66,6 +72,10 @@ public class User {
 
     public void setTweets(List<Tweet> tweets) {
         this.tweets = tweets;
+    }
+
+    public Profile getProfile() {
+        return profile;
     }
 
     @Override

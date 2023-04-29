@@ -44,21 +44,21 @@ public class UserService {
     /**
      * create a user with a unique email and non-blank password
      *
-     * @param userObject the object that contains the email and password
+     * @param registerRequest the object that contains the email and password
      * @return created user
-     * @throws InformationExistException
-     * @throws InformationInvalidException
+     * @throws InformationExistException if the email is already existed
+     * @throws InformationInvalidException if the password is blank
      */
-    public User createUser(User userObject) {
-        Optional<User> user = userRepository.findUserByEmailAddress(userObject.getEmailAddress());
+    public User createUser(RegisterRequest registerRequest) {
+        Optional<User> user = userRepository.findUserByEmailAddress(registerRequest.getEmail());
         if (user.isPresent()) {
-            throw new InformationExistException("The email address " + userObject.getEmailAddress() + " is already existed");
+            throw new InformationExistException("The email address " + registerRequest.getEmail() + " is already existed");
         } else {
-            if (userObject.getPassword().isBlank()) {
+            if (registerRequest.getPassword().isBlank()) {
                 throw new InformationInvalidException("Password can not be empty or only contains space character");
             } else {
-                userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
-                return userRepository.save(userObject);
+                User newUser = new User(null,registerRequest.getEmail(), passwordEncoder.encode(registerRequest.getPassword()));
+                return userRepository.save(newUser);
             }
         }
     }

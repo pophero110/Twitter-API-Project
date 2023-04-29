@@ -2,6 +2,7 @@ package com.jeffdev.twitterapi.controller;
 
 import com.jeffdev.twitterapi.model.User;
 import com.jeffdev.twitterapi.model.request.LoginRequest;
+import com.jeffdev.twitterapi.model.request.RegisterRequest;
 import com.jeffdev.twitterapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +21,13 @@ public class UserController {
     /**
      * Creates a new user in the database
      *
-     * @param userObject the User object to create
+     * @param registerRequest the object that contains the email and password
      * @return the created User object with its unique ID set
      */
     @PostMapping("")
-    public User createUser(@RequestBody User userObject) {
-        return userService.createUser(userObject);
+    public User createUser(@RequestBody RegisterRequest registerRequest) {
+        return userService.createUser(registerRequest);
     }
-
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {

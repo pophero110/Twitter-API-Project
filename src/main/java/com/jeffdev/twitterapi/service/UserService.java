@@ -4,6 +4,7 @@ import com.jeffdev.twitterapi.exception.InformationExistException;
 import com.jeffdev.twitterapi.exception.InformationInvalidException;
 import com.jeffdev.twitterapi.model.User;
 import com.jeffdev.twitterapi.model.request.LoginRequest;
+import com.jeffdev.twitterapi.model.request.RegisterRequest;
 import com.jeffdev.twitterapi.model.response.LoginResponse;
 import com.jeffdev.twitterapi.repository.UserRepository;
 import com.jeffdev.twitterapi.security.JWTUtils;
@@ -22,13 +23,13 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    private JWTUtils jwtUtils;
+    private final JWTUtils jwtUtils;
 
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     private MyUserDetails myUserDetails;
 
     @Autowired
@@ -84,9 +85,11 @@ public class UserService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             myUserDetails = (MyUserDetails) authentication.getPrincipal();
             final String JWT = jwtUtils.generateJwtToken(myUserDetails);
-            return ResponseEntity.ok(new LoginResponse(JWT, myUserDetails.getUser().getTweets(), myUserDetails.getUser().getProfile()));
+            // ResponseEntity represents the whole HTTP response: status code, headers, and body
+            // https://www.baeldung.com/spring-response-entity
+            return ResponseEntity.ok(new LoginResponse(JWT, myUserDetails.getUser().getProfile()));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new LoginResponse("Error: Username or password is incorrect", null, null));
+            return ResponseEntity.badRequest().body(new LoginResponse("Error: Username or password is incorrect", null));
         }
     }
 }

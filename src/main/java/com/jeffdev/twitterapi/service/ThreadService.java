@@ -59,7 +59,7 @@ public class ThreadService {
             throw new InformationNotFoundException("The tweet with id " + tweetId + " does not exist");
         }
 
-        if (tweet.get().getThread() == null && tweetRepository.existsByParentId(tweetId)) {
+        if (tweetRepository.existsByParentId(tweetId)) {
             Optional<Tweet> childTweet = tweetRepository.findFirstByParentId(tweetId);
             replyTweet.setThread(childTweet.get().getThread());
         } else {

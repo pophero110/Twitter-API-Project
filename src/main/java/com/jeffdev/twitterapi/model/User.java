@@ -17,6 +17,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @JsonIgnore
     private String emailAddress;
 
     @Column(nullable = false)

@@ -34,8 +34,6 @@ public class Tweet {
     private long parentId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

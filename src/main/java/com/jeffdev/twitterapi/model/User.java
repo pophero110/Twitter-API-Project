@@ -25,7 +25,7 @@ public class User {
     private String password;
 
     @OneToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
     private List<Tweet> tweets;
 
     // The value of mappedBy is the name of the association-mapping attribute on the owning side

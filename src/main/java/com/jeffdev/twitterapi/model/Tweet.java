@@ -36,6 +36,7 @@ public class Tweet {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne

@@ -1,5 +1,6 @@
 package com.jeffdev.twitterapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -29,7 +30,13 @@ public class Tweet {
     @LastModifiedDate
     private Instant updatedAt;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
     public Tweet() {
+
     }
 
     public Tweet(long id, String content, Instant createdAt, Instant updatedAt) {
@@ -69,6 +76,14 @@ public class Tweet {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

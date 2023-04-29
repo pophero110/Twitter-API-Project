@@ -3,8 +3,11 @@ package com.jeffdev.twitterapi.service;
 import com.jeffdev.twitterapi.exception.InformationInvalidException;
 import com.jeffdev.twitterapi.exception.InformationNotFoundException;
 import com.jeffdev.twitterapi.model.Tweet;
+import com.jeffdev.twitterapi.model.User;
 import com.jeffdev.twitterapi.repository.TweetRepository;
+import com.jeffdev.twitterapi.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +21,11 @@ public class TweetService {
     @Autowired
     public void setTweetRepository(TweetRepository tweetRepository) {
         this.tweetRepository = tweetRepository;
+    }
+
+    public static User getCurrentLoggedInUser() {
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return myUserDetails.getUser();
     }
 
     /**
@@ -34,6 +42,7 @@ public class TweetService {
             else if (tweetObject.getContent().length() > 280) {
                 throw new InformationInvalidException("Content can not be longer than 280 character");
             } else {
+                tweetObject.setUser(getCurrentLoggedInUser());
                 return tweetRepository.save(tweetObject);
             }
         } catch (Exception e) {
@@ -57,7 +66,7 @@ public class TweetService {
      * @throws InformationNotFoundException
      */
     public Tweet updateTweet(Long tweetId, Tweet tweetObject) {
-        Optional<Tweet> tweet = tweetRepository.findById(tweetId);
+        Optional<Tweet> tweet = tweetRepository.findByIdAndAndUserId(tweetId, getCurrentLoggedInUser().getId());
         if (tweet.isPresent()) {
             if (tweetObject.getContent().isBlank()) {
                 throw new InformationInvalidException("Content can not be empty or contains only space character");
@@ -80,7 +89,7 @@ public class TweetService {
      * @throws InformationNotFoundException
      */
     public Tweet deleteTweet(Long tweetId) {
-        Optional<Tweet> tweet = tweetRepository.findById(tweetId);
+        Optional<Tweet> tweet = tweetRepository.findByIdAndAndUserId(tweetId, getCurrentLoggedInUser().getId());
         if (tweet.isPresent()) {
             tweetRepository.delete(tweet.get());
             return tweet.get();

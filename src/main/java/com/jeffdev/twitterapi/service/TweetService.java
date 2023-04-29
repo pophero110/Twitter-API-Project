@@ -66,7 +66,7 @@ public class TweetService {
      * @throws InformationNotFoundException
      */
     public Tweet updateTweet(Long tweetId, Tweet tweetObject) {
-        Optional<Tweet> tweet = tweetRepository.findByIdAndAndUserId(tweetId, getCurrentLoggedInUser().getId());
+        Optional<Tweet> tweet = tweetRepository.findByIdAndUserId(tweetId, getCurrentLoggedInUser().getId());
         if (tweet.isPresent()) {
             if (tweetObject.getContent().isBlank()) {
                 throw new InformationInvalidException("Content can not be empty or contains only space character");
@@ -89,7 +89,7 @@ public class TweetService {
      * @throws InformationNotFoundException
      */
     public Tweet deleteTweet(Long tweetId) {
-        Optional<Tweet> tweet = tweetRepository.findByIdAndAndUserId(tweetId, getCurrentLoggedInUser().getId());
+        Optional<Tweet> tweet = tweetRepository.findByIdAndUserId(tweetId, getCurrentLoggedInUser().getId());
         if (tweet.isPresent()) {
             tweetRepository.delete(tweet.get());
             return tweet.get();

@@ -10,7 +10,7 @@ public interface TweetRepository extends JpaRepository<Tweet, Long> {
 
     List<Tweet> findAllByOrderByCreatedAtDesc();
 
-    Optional<Tweet> findByIdAndAndUserId(Long tweetId, Long userId);
+    Optional<Tweet> findByIdAndUserId(Long tweetId, Long userId);
 
     // find child tweets by parent id
     Optional<Tweet> findFirstByParentId(Long parentId);

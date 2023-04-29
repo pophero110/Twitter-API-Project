@@ -5,6 +5,7 @@ import com.jeffdev.twitterapi.exception.InformationNotFoundException;
 import com.jeffdev.twitterapi.model.Tweet;
 import com.jeffdev.twitterapi.model.User;
 import com.jeffdev.twitterapi.repository.TweetRepository;
+import com.jeffdev.twitterapi.repository.UserRepository;
 import com.jeffdev.twitterapi.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +19,12 @@ public class TweetService {
 
     private TweetRepository tweetRepository;
 
+    private UserRepository userRepository;
+
     @Autowired
-    public void setTweetRepository(TweetRepository tweetRepository) {
+    public TweetService(TweetRepository tweetRepository, UserRepository userRepository) {
         this.tweetRepository = tweetRepository;
+        this.userRepository = userRepository;
     }
 
     public static User getCurrentLoggedInUser() {
@@ -115,5 +119,29 @@ public class TweetService {
         } else {
             throw new InformationNotFoundException("Tweet with the id " + tweetId + " is not found");
         }
+    }
+
+    /**
+     * Return a list of tweets that belongs the user of given user id
+     *
+     * @param userId the given user id
+     * @return a list of tweet sorted by created_at desc
+     * @throws InformationNotFoundException If the user of given user id is not found
+     */
+    public List<Tweet> getTweetsByUser(Long userId) {
+        if (userRepository.existsById(userId)) {
+            return tweetRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
+        } else {
+            throw new InformationNotFoundException("User with id " + userId + " is not found");
+        }
+
+    }
+
+    /**
+     * Return current user's tweets
+     * @return a list of tweet sorted by created_at desc
+     */
+    public List<Tweet> getMyTweets() {
+        return tweetRepository.findAllByUserIdOrderByCreatedAtDesc(getCurrentLoggedInUser().getId());
     }
 }

@@ -1,5 +1,6 @@
 package com.jeffdev.twitterapi.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,6 +25,7 @@ public class Tweet {
     // Source: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#auditing.annotations
     // Source: https://www.logicbig.com/tutorials/spring-framework/spring-data/basic-auditing.html
     @CreatedDate
+    @JsonProperty("created_at")
     private Instant createdAt;
 
     @LastModifiedDate

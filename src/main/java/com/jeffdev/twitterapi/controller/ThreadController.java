@@ -4,10 +4,8 @@ package com.jeffdev.twitterapi.controller;
 import com.jeffdev.twitterapi.model.Tweet;
 import com.jeffdev.twitterapi.service.ThreadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityListeners;
 import java.util.List;
 
 @RestController

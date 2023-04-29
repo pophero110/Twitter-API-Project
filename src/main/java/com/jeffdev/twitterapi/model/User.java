@@ -55,24 +55,8 @@ public class User {
         return emailAddress;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Tweet> getTweets() {
-        return tweets;
-    }
-
-    public void setTweets(List<Tweet> tweets) {
-        this.tweets = tweets;
     }
 
     public Profile getProfile() {

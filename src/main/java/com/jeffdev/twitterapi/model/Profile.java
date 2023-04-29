@@ -26,13 +26,6 @@ public class Profile {
     public Profile() {
     }
 
-    public Profile(Long id, String name, String description, User user) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.user = user;
-    }
-
     public Long getId() {
         return id;
     }

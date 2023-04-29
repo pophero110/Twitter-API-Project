@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private Logger logger = Logger.getLogger(JwtRequestFilter.class.getName());
+    private final Logger logger = Logger.getLogger(JwtRequestFilter.class.getName());
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;
@@ -28,9 +28,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private JWTUtils jwtUtils;
 
     /**
-     * extracts a JWT token from the Authorization header of an incoming HTTP request.
-     * @param request
-     * @return A string containing the extracted JWT token
+     * Parses the JWT token from the Authorization header of the incoming request.
+     * @param request - the incoming HttpServletRequest
+     * @return the JWT token string extracted from the Authorization header, or null if the header is missing or invalid
      */
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
@@ -42,12 +42,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     /**
-     * filter to handle JWT-based authorization for incoming requests.
-     * @param request
-     * @param response
-     * @param filterChain
-     * @throws ServletException
-     * @throws IOException
+     * A filter to handle JWT-based authorization for incoming requests.
+     * This filter intercepts incoming HTTP requests and checks for a valid JWT token in the authorization header.
+     * If a valid token is present, it sets the authentication context with the user details retrieved from the token.
+     * This allows the user to access protected resources on the server.
+     *
+     * @param request     the HTTP request
+     * @param response    the HTTP response
+     * @param filterChain the filter chain
+     * @throws ServletException if an error occurs while processing the request
+     * @throws IOException      if an I/O error occurs while processing the request
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

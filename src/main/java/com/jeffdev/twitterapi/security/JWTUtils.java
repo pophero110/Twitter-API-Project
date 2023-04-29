@@ -19,9 +19,10 @@ public class JWTUtils {
     private int jwtExpirationMs;
 
     /**
-     * generate JWT and include user email address
-     * @param myUserDetails
-     * @return JWT
+     * Generates a JWT token for the given user details.
+     *
+     * @param myUserDetails the user details for which to generate the token
+     * @return the generated JWT token
      */
     public String generateJwtToken(MyUserDetails myUserDetails) {
         return Jwts.builder()
@@ -33,8 +34,9 @@ public class JWTUtils {
     }
 
     /**
-     * get a user's email address from JWT claims
-     * @param token
+     * get a user's email address from JWT payload
+     *
+     * @param token JWT
      * @return email address
      */
     public String getUserNameFromJwtToken(String token) {
@@ -43,8 +45,9 @@ public class JWTUtils {
 
     /**
      * validate a JWT
-     * @param authToken
-     * @return
+     *
+     * @param authToken the JWT that need to be validated
+     * @return true if the JWT is valid else false
      */
     public boolean validateJwtToken(String authToken) {
         try {

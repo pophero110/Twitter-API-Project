@@ -29,11 +29,11 @@ public class ProfileService {
 
     /**
      * Create a user's profile with given Profile object
-     * If the user has a profile already, an InformationExistException will be thrown
-     * If the name in the given Profile object is blank, an InformationExistException will be thrown
+     *
      * @param profileObject the profile object that need to created
      * @return created profile
-     * @throws InformationExistException
+     * @throws InformationExistException If the user has a profile already
+     * @throws InformationExistException If the name in the given Profile object is blank
      */
     public Profile createProfile(Profile profileObject) {
         if (profileRepository.existsByUserId(getCurrentLoggedInUser().getId())) {
@@ -55,7 +55,7 @@ public class ProfileService {
      * @param profileObject The Profile object containing the updated profile information.
      * @return The updated Profile object.
      * @throws InformationNotFoundException If the current user doesn't have a profile.
-     * @throws InformationInvalidException If the name in the provided Profile object is blank.
+     * @throws InformationInvalidException  If the name in the provided Profile object is blank.
      */
     public Profile updateProfile(Profile profileObject) {
         Optional<Profile> profile = profileRepository.findByUserId(getCurrentLoggedInUser().getId());
@@ -73,11 +73,11 @@ public class ProfileService {
 
     /**
      * Get a user's profile by given user id
-     * If the profile is not existed or the user is not existed, an InformationNotFoundException will be thrown
+     *
      * @param userId the id of the user
      * @return Profile
-     * @throws InformationNotFoundException
-     */ 
+     * @throws InformationNotFoundException If the profile is not existed or the user is not existed
+     */
     public Profile getProfileByUserId(Long userId) {
         Optional<Profile> profile = profileRepository.findByUserId(userId);
         if (profile.isPresent()) {

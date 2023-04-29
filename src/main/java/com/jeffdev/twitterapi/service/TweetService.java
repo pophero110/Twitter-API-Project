@@ -30,16 +30,16 @@ public class TweetService {
 
     /**
      * Create a tweet in database and return it
+     *
      * @param tweetObject The tweet object that need to saved in database
      * @return The newly saved tweet
-     * @throws InformationInvalidException
+     * @throws InformationInvalidException If content is blank in the tweetObject
      */
     public Tweet createTweet(Tweet tweetObject) {
         try {
             if (tweetObject.getContent().isBlank()) {
                 throw new InformationInvalidException("Content can not be empty or contains only space character");
-            }
-            else if (tweetObject.getContent().length() > 280) {
+            } else if (tweetObject.getContent().length() > 280) {
                 throw new InformationInvalidException("Content can not be longer than 280 character");
             } else {
                 tweetObject.setUser(getCurrentLoggedInUser());
@@ -52,6 +52,7 @@ public class TweetService {
 
     /**
      * Get a list of tweets sorted by created_at desc
+     *
      * @return a list of tweets or an empty list
      */
     public List<Tweet> getTweets() {
@@ -61,17 +62,17 @@ public class TweetService {
 
     /**
      * update a specific tweet by tweet id based on the tweet object
+     *
      * @param tweetId the id of the tweet that needs to be updated based on the tweet object
      * @return updated tweet
-     * @throws InformationNotFoundException
+     * @throws InformationNotFoundException If no tweet associated with given tweet id
      */
     public Tweet updateTweet(Long tweetId, Tweet tweetObject) {
         Optional<Tweet> tweet = tweetRepository.findByIdAndUserId(tweetId, getCurrentLoggedInUser().getId());
         if (tweet.isPresent()) {
             if (tweetObject.getContent().isBlank()) {
                 throw new InformationInvalidException("Content can not be empty or contains only space character");
-            }
-            else if (tweetObject.getContent().length() > 280) {
+            } else if (tweetObject.getContent().length() > 280) {
                 throw new InformationInvalidException("Content can not be longer than 280 character");
             } else {
                 tweet.get().setContent(tweetObject.getContent());
@@ -84,9 +85,10 @@ public class TweetService {
 
     /**
      * delete a tweet based on tweet id
+     *
      * @param tweetId the id of the tweet
      * @return deleted tweet
-     * @throws InformationNotFoundException
+     * @throws InformationNotFoundException If no tweet associated with given tweet id
      */
     public Tweet deleteTweet(Long tweetId) {
         Optional<Tweet> tweet = tweetRepository.findByIdAndUserId(tweetId, getCurrentLoggedInUser().getId());
@@ -101,9 +103,10 @@ public class TweetService {
     /**
      * get a tweet by given tweet id
      * If a tweet can not be found by given tweet id, an InformationNotFoundException will be thrown
+     *
      * @param tweetId the given tweet id
      * @return found tweet
-     * @throws InformationNotFoundException
+     * @throws InformationNotFoundException If no tweet associated with given tweet id
      */
     public Tweet getTweet(Long tweetId) {
         Optional<Tweet> tweet = tweetRepository.findById(tweetId);

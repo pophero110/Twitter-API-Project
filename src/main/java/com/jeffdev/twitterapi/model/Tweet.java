@@ -30,10 +30,16 @@ public class Tweet {
     @LastModifiedDate
     private Instant updatedAt;
 
+    @Column(nullable = true)
+    private long parentId;
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "thread_id")
+    private Thread thread;
 
     public Tweet() {
 
@@ -86,6 +92,22 @@ public class Tweet {
         this.user = user;
     }
 
+    public Thread getThread() {
+        return thread;
+    }
+
+    public void setThread(Thread thread) {
+        this.thread = thread;
+    }
+
+    public long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(long parentId) {
+        this.parentId = parentId;
+    }
+
     @Override
     public String toString() {
         return "Tweet{" +
@@ -93,6 +115,8 @@ public class Tweet {
                 ", content='" + content + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", user=" + user +
+                ", thread=" + thread +
                 '}';
     }
 }

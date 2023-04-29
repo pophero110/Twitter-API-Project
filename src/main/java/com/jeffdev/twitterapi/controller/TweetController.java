@@ -57,4 +57,15 @@ public class TweetController {
     public Tweet deleteTweet(@PathVariable Long tweetId) {
         return tweetService.deleteTweet(tweetId);
     }
+
+
+    /**
+     * return a tweet by given tweet id
+     * @param tweetId the given tweet id
+     * @return tweet
+     */
+    @GetMapping("/{tweetId}")
+    public Tweet getTweet(@PathVariable Long tweetId) {
+        return tweetService.getTweet(tweetId);
+    }
 }

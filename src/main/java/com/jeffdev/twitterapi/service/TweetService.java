@@ -97,4 +97,20 @@ public class TweetService {
             throw new InformationNotFoundException("Tweet is not found with id " + tweetId);
         }
     }
+
+    /**
+     * get a tweet by given tweet id
+     * If a tweet can not be found by given tweet id, an InformationNotFoundException will be thrown
+     * @param tweetId the given tweet id
+     * @return found tweet
+     * @throws InformationNotFoundException
+     */
+    public Tweet getTweet(Long tweetId) {
+        Optional<Tweet> tweet = tweetRepository.findById(tweetId);
+        if (tweet.isPresent()) {
+            return tweet.get();
+        } else {
+            throw new InformationNotFoundException("Tweet with the id " + tweetId + " is not found");
+        }
+    }
 }

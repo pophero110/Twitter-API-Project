@@ -2,7 +2,17 @@
 **Developer**: Jeff Ou  
 **Description**: This is a backend-only application that provides REST APIs with functionalities similar to Twitter's backend, allowing users to perform actions such as *creating, updating, and deleting tweets, creating profile, replying to a tweet,  searching for tweets, and adding hashtags*.
 # Table of Contents
+
+- [Project Dependencies](#project-dependencies)
 - [API Reference](#api-reference)
+# Project Dependencies
+- spring-boot-starter-web: for building web applications using Spring MVC.
+- spring-boot-starter-data-jpa: for using Spring Data JPA with Hibernate as the underlying implementation.
+- postgresql: for working with PostgresSQL databases.
+- spring-boot-starter-security: for securing web applications using Spring Security.
+- jjwt-api: for creating and parsing JSON Web Tokens (JWTs).
+- jjwt-impl: implementation of JSON Web Tokens (JWTs).
+- jjwt-jackson: for handling JSON serialization and deserialization of JWTs.
 
 
 # API Reference

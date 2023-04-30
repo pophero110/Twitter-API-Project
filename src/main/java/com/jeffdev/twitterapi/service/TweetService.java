@@ -167,7 +167,7 @@ public class TweetService {
     public Tweet addHashtag(Long tweetId, Hashtag addedHashtag) {
         Tweet tweet = tweetRepository.findByIdAndUserId(tweetId, getCurrentLoggedInUser().getId())
                 .orElseThrow(() -> new InformationNotFoundException("You don't have any tweet with id " + tweetId));
-        if (addedHashtag.getName().isBlank())
+        if (addedHashtag.getName().isBlank() || !addedHashtag.getName().startsWith("#"))
             throw new InformationInvalidException("Hashtag can not be empty or only contains space character");
         Optional<Hashtag> existingHashtag = hashtagRepository.findHashtagByName(addedHashtag.getName());
         if (existingHashtag.isPresent()) {

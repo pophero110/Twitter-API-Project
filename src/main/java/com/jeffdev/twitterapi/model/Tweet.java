@@ -94,6 +94,10 @@ public class Tweet {
         this.parentId = parentId;
     }
 
+    public Set<Hashtag> getHashtags() {
+        return hashtags;
+    }
+
     @Override
     public String toString() {
         return "Tweet{" +

@@ -162,10 +162,13 @@ public class TweetService {
      * @return the updated tweet object
      * @throws InformationNotFoundException if the current user does not have a tweet with the given ID
      * @throws InformationExistException    if the tweet already has the given hashtag
+     * @throws InformationInvalidException if the name of addedHashtag is blank
      */
     public Tweet addHashtag(Long tweetId, Hashtag addedHashtag) {
         Tweet tweet = tweetRepository.findByIdAndUserId(tweetId, getCurrentLoggedInUser().getId())
                 .orElseThrow(() -> new InformationNotFoundException("You don't have any tweet with id " + tweetId));
+        if (addedHashtag.getName().isBlank())
+            throw new InformationInvalidException("Hashtag can not be empty or only contains space character");
         Optional<Hashtag> existingHashtag = hashtagRepository.findHashtagByName(addedHashtag.getName());
         if (existingHashtag.isPresent()) {
             if (tweet.getHashtags().contains(existingHashtag.get())) {

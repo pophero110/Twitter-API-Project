@@ -25,6 +25,13 @@
 ### 5. Create user stories
 ### 6. Determine Development Process
 ## [Planning](https://github.com/users/pophero110/projects/5/views/5)
+*User stories order by priority*
+- [Tweet Management](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26852053)
+- [Exception Management](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26916819)
+- [User Authentication](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26832640)
+- [User Profile](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26832800)
+- [Thread Management](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26834733)
+- [Hashtag Management](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26852063)
 
 # API Reference
 ## User

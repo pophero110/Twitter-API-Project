@@ -1,7 +1,6 @@
-Developer: Jeff Ou  
-Project: Twitter REST APIs Spring Boot Application  
-Description: A backend-only application with APIs similar to Twitter that provides the same features and functionalities as Twitter's backend
-
+# Twitter REST APIs Spring Boot Application
+**Developer**: Jeff Ou  
+**Description**: This is a backend-only application that provides REST APIs with functionalities similar to Twitter's backend, allowing users to perform actions such as *creating, updating, and deleting tweets, creating profile, replying to a tweet,  searching for tweets, and adding hashtags*.
 # Table of Contents
 - [API Reference](#api-reference)
 

@@ -10,7 +10,7 @@
 - [Credits](#credits)
 
 # Technologies
-**Github Project**: resource management  
+**GitHub Project**: resource management  
 **IntelliJ**: development IDEA  
 **Draw.io**: Create Entity Relationship Diagram  
 **Postman**: APIs Testing and Documentation  

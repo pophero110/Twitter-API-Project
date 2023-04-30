@@ -7,6 +7,7 @@
 - [Project Dependencies](#project-dependencies)
 - [Project Management](#project-management)
 - [API Reference](#api-reference)
+- [Improvement Ideas during development](#improvement-ideas-during-development)
 - [Credits](#credits)
 
 # Technologies
@@ -84,6 +85,14 @@
 | POST         | /api/tweets/tweetId/hashtags | Add a hashtag to a tweet | Private | { hashtagName } |
 | GET          | /api/tweets/search?hashtags= | Get tweets by hashtags   | Private |                 |
 | GET          | /api/hashtags/trending       | Get trending hashtags    | Private |                 |# Credits
+# Improvement Ideas during development
+- Validator interface for validating user's input such as tweet, hashtag etc.
+- Optimize query performance such as users and tweets
+- Refactor getCurrentLoggedInUser
+- Refactor code using Intellij Code Inspection
+- Implement APIs automated testing
+
+# Credits
 
 - **An [article](https://www.baeldung.com/spring-response-entity) that explains what is ResponseEntity and how to use it**
   - *ResponseEntity represents the whole HTTP response: status code, headers, and body*

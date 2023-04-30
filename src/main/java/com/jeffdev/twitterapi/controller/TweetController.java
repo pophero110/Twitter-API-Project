@@ -6,9 +6,7 @@ import com.jeffdev.twitterapi.model.Tweet;
 import com.jeffdev.twitterapi.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/api/tweets")
@@ -103,5 +101,11 @@ public class TweetController {
     @PostMapping("/{tweetId}/hashtags")
     public Tweet addHashTag(@PathVariable Long tweetId, @RequestBody Hashtag hashtag) {
         return tweetService.addHashtag(tweetId, hashtag);
+    }
+
+
+    @GetMapping("/search")
+    public List<Tweet> searchTweetByHashtags(@RequestParam List<String> hashtags ) {
+        return tweetService.searchTweetByHashtags(hashtags);
     }
 }

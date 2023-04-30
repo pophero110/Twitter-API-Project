@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class TweetService {
@@ -174,9 +174,23 @@ public class TweetService {
             if (tweet.getHashtags().contains(existingHashtag.get())) {
                 throw new InformationExistException("Tweet with the id " + tweetId + " already has the hashtag " + addedHashtag.getName());
             }
+            tweet.getHashtags().add(existingHashtag.get());
         } else {
             tweet.getHashtags().add(addedHashtag);
         }
         return tweetRepository.save(tweet);
+    }
+
+    public List<Tweet> searchTweetByHashtags(List<String> hashtags) {
+        List<Tweet> tweets = new ArrayList<>();
+        hashtags.stream().forEach(hashtagName -> {
+            Optional<Hashtag> hashtag = hashtagRepository.findHashtagByName(hashtagName);
+            if (hashtag.isPresent()) {
+                tweets.addAll(tweetRepository.findByHashtagsId(hashtag.get().getId()));
+            }
+        });
+        // sort the tweets by created_at in descending order
+        tweets.sort((t1, t2) -> t2.getCreatedAt().compareTo(t1.getCreatedAt()));
+        return tweets;
     }
 }

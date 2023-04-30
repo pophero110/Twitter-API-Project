@@ -99,6 +99,10 @@ public class Tweet {
         return hashtags;
     }
 
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
     @Override
     public String toString() {
         return "Tweet{" +

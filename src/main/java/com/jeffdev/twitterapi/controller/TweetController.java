@@ -104,6 +104,11 @@ public class TweetController {
     }
 
 
+    /**
+     * Take a hashtags query param and return a list of tweets that related to the hashtags
+     * @param hashtags the hashtag query param
+     * @return a list of tweets that related to the hashtags
+     */
     @GetMapping("/search")
     public List<Tweet> searchTweetByHashtags(@RequestParam List<String> hashtags ) {
         return tweetService.searchTweetByHashtags(hashtags);

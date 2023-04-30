@@ -21,11 +21,11 @@ import java.util.Optional;
 @Service
 public class TweetService {
 
-    private TweetRepository tweetRepository;
+    private final TweetRepository tweetRepository;
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private HashtagRepository hashtagRepository;
+    private final HashtagRepository hashtagRepository;
 
     @Autowired
     public TweetService(TweetRepository tweetRepository, UserRepository userRepository, HashtagRepository hashtagRepository) {
@@ -181,13 +181,16 @@ public class TweetService {
         return tweetRepository.save(tweet);
     }
 
+    /**
+     * Return a list of tweets that related to the given list of hashtags
+     * @param hashtags A list of hashtags
+     * @return a list of tweets or an empty list
+     */
     public List<Tweet> searchTweetByHashtags(List<String> hashtags) {
         List<Tweet> tweets = new ArrayList<>();
-        hashtags.stream().forEach(hashtagName -> {
+        hashtags.forEach(hashtagName -> {
             Optional<Hashtag> hashtag = hashtagRepository.findHashtagByName(hashtagName);
-            if (hashtag.isPresent()) {
-                tweets.addAll(tweetRepository.findByHashtagsId(hashtag.get().getId()));
-            }
+            hashtag.ifPresent(value -> tweets.addAll(tweetRepository.findByHashtagsId(value.getId())));
         });
         // sort the tweets by created_at in descending order
         tweets.sort((t1, t2) -> t2.getCreatedAt().compareTo(t1.getCreatedAt()));

@@ -16,6 +16,11 @@ public class HashtagService {
         this.hashtagRepository = hashtagRepository;
     }
 
+    /**
+     * Get a list of the trending hashtags, ordered by the number of tweets they appear in, in descending order.
+     *
+     * @return a list of the trending hashtags
+     */
     public List<Hashtag> getTrendingHashtags() {
         List<Hashtag> hashtags = hashtagRepository.findAll();
         hashtags.sort((t1, t2) -> t2.getTweets().size() - (t1.getTweets().size()));

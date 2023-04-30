@@ -21,6 +21,11 @@ public class HashtagController {
         this.hashtagService = hashtagService;
     }
 
+    /**
+     * Retrieves a list of trending hashtags sorted by the number of tweets associated with each hashtag.
+     *
+     * @return A list of hashtags in descending order of their popularity.
+     */
     @GetMapping(path = "/trending")
     public List<Hashtag> getTrendingHashtags() {
         return hashtagService.getTrendingHashtags();

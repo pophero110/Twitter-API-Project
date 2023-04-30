@@ -7,6 +7,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tweets")
@@ -41,6 +43,15 @@ public class Tweet {
     @ManyToOne
     @JoinColumn(name = "thread_id")
     private Thread thread;
+
+    @ManyToMany(cascade = {
+            CascadeType.ALL
+    })
+    @JoinTable(
+            name = "tweet_hashtag",
+            joinColumns = @JoinColumn(name = "tweet_id"),
+            inverseJoinColumns = @JoinColumn(name = "hashtag_id"))
+    Set<Hashtag> hashtags = new HashSet<>();
 
     public Tweet() {
 

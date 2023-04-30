@@ -1,5 +1,6 @@
 package com.jeffdev.twitterapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -29,6 +30,7 @@ public class Hashtag {
     @ManyToMany(mappedBy = "hashtags", cascade = {
             CascadeType.ALL
     })
+    @JsonIgnore
     Set<Tweet> tweets = new HashSet<>();
 
     public String getName() {
@@ -37,5 +39,9 @@ public class Hashtag {
 
     public Long getId() {
         return id;
+    }
+
+    public Set<Tweet> getTweets() {
+        return tweets;
     }
 }

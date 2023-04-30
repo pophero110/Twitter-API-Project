@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * Represents a request to register or login, containing the user's email address and password.
  */
 public class UserRequest {
-    @Email(message = "Email format is invalid")
+    @Email(message = "invalid format")
     private String email;
 
     @NotBlank

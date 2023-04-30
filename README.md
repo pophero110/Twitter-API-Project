@@ -4,6 +4,7 @@
 # Table of Contents
 
 - [Project Dependencies](#project-dependencies)
+- [Project Management](#project-management)
 - [API Reference](#api-reference)
 # Project Dependencies
 - spring-boot-starter-web: for building web applications using Spring MVC.
@@ -14,6 +15,16 @@
 - jjwt-impl: implementation of JSON Web Tokens (JWTs).
 - jjwt-jackson: for handling JSON serialization and deserialization of JWTs.
 
+# Project Management
+
+## [Brainstorm](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26910994)
+### 1. Determine what kind of application I want to build
+### 2. Identify the entities that are relevant to the domain
+### 3. Use ERD to visualize the relationship between the entities and include the attributes associated with each entity
+### 4. Design RESTful APIs
+### 5. Create user stories
+### 6. Determine Development Process
+## [Planning](https://github.com/users/pophero110/projects/5/views/5)
 
 # API Reference
 ## User

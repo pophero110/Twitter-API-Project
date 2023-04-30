@@ -1,9 +1,16 @@
 package com.jeffdev.twitterapi.model.request;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
- * A simple model class representing a request object for a register operation.
+ * Represents a request to register or login, containing the user's email address and password.
  */
-public class RegisterRequest {
+public class UserRequest {
+    @Email(message = "Email format is invalid")
     private String email;
+
+    @NotBlank
     private String password;
 
     /**

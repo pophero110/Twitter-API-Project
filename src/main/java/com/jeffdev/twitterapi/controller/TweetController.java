@@ -1,12 +1,14 @@
 package com.jeffdev.twitterapi.controller;
 
 
+import com.jeffdev.twitterapi.model.Hashtag;
 import com.jeffdev.twitterapi.model.Tweet;
 import com.jeffdev.twitterapi.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/api/tweets")
@@ -72,6 +74,7 @@ public class TweetController {
 
     /**
      * return a list of tweets that belongs to the user of given user id
+     *
      * @param userId the given user id
      * @return a list of tweets
      */
@@ -82,10 +85,23 @@ public class TweetController {
 
     /**
      * return current user's tweets
+     *
      * @return a list of tweets
      */
     @GetMapping("/me")
     public List<Tweet> getMyTweets() {
         return tweetService.getMyTweets();
+    }
+
+
+    /**
+     * Adds a hashtag to the specified tweet.
+     * @param tweetId the ID of the tweet to add the hashtag to
+     * @param hashtag the hashtag to add
+     * @return the updated tweet with the added hashtag
+     */
+    @PostMapping("/{tweetId}/hashtags")
+    public Tweet addHashTag(@PathVariable Long tweetId, @RequestBody Hashtag hashtag) {
+        return tweetService.addHashtag(tweetId, hashtag);
     }
 }

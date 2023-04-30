@@ -20,4 +20,7 @@ public interface TweetRepository extends JpaRepository<Tweet, Long> {
 
     // find all tweets posted by a user
     List<Tweet> findAllByUserIdOrderByCreatedAtDesc(Long userId);
+
+    // find all tweets that contains the hashtag of given hashtag id
+    List<Tweet> findByHashtagsId(Long hashtagId);
 }

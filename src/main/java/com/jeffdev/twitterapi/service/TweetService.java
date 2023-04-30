@@ -14,18 +14,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class TweetService {
 
-    private TweetRepository tweetRepository;
+    private final TweetRepository tweetRepository;
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private HashtagRepository hashtagRepository;
+    private final HashtagRepository hashtagRepository;
 
     @Autowired
     public TweetService(TweetRepository tweetRepository, UserRepository userRepository, HashtagRepository hashtagRepository) {
@@ -174,9 +174,26 @@ public class TweetService {
             if (tweet.getHashtags().contains(existingHashtag.get())) {
                 throw new InformationExistException("Tweet with the id " + tweetId + " already has the hashtag " + addedHashtag.getName());
             }
+            tweet.getHashtags().add(existingHashtag.get());
         } else {
             tweet.getHashtags().add(addedHashtag);
         }
         return tweetRepository.save(tweet);
+    }
+
+    /**
+     * Return a list of tweets that related to the given list of hashtags
+     * @param hashtags A list of hashtags
+     * @return a list of tweets or an empty list
+     */
+    public List<Tweet> searchTweetByHashtags(List<String> hashtags) {
+        List<Tweet> tweets = new ArrayList<>();
+        hashtags.forEach(hashtagName -> {
+            Optional<Hashtag> hashtag = hashtagRepository.findHashtagByName(hashtagName);
+            hashtag.ifPresent(value -> tweets.addAll(tweetRepository.findByHashtagsId(value.getId())));
+        });
+        // sort the tweets by created_at in descending order
+        tweets.sort((t1, t2) -> t2.getCreatedAt().compareTo(t1.getCreatedAt()));
+        return tweets;
     }
 }

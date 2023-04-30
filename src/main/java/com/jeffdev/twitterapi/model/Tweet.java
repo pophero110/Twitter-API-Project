@@ -7,6 +7,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tweets")
@@ -31,7 +33,8 @@ public class Tweet {
     @LastModifiedDate
     private Instant updatedAt;
 
-    @Column()
+    @Column
+    @JsonProperty("parent_id")
     private long parentId;
 
     @ManyToOne
@@ -41,6 +44,15 @@ public class Tweet {
     @ManyToOne
     @JoinColumn(name = "thread_id")
     private Thread thread;
+
+    @ManyToMany(cascade = {
+            CascadeType.ALL
+    })
+    @JoinTable(
+            name = "tweet_hashtag",
+            joinColumns = @JoinColumn(name = "tweet_id"),
+            inverseJoinColumns = @JoinColumn(name = "hashtag_id"))
+    Set<Hashtag> hashtags = new HashSet<>();
 
     public Tweet() {
 
@@ -81,6 +93,10 @@ public class Tweet {
 
     public void setParentId(long parentId) {
         this.parentId = parentId;
+    }
+
+    public Set<Hashtag> getHashtags() {
+        return hashtags;
     }
 
     @Override

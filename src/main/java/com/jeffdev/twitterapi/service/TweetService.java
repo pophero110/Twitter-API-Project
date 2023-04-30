@@ -1,9 +1,12 @@
 package com.jeffdev.twitterapi.service;
 
+import com.jeffdev.twitterapi.exception.InformationExistException;
 import com.jeffdev.twitterapi.exception.InformationInvalidException;
 import com.jeffdev.twitterapi.exception.InformationNotFoundException;
+import com.jeffdev.twitterapi.model.Hashtag;
 import com.jeffdev.twitterapi.model.Tweet;
 import com.jeffdev.twitterapi.model.User;
+import com.jeffdev.twitterapi.repository.HashtagRepository;
 import com.jeffdev.twitterapi.repository.TweetRepository;
 import com.jeffdev.twitterapi.repository.UserRepository;
 import com.jeffdev.twitterapi.security.MyUserDetails;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TweetService {
@@ -21,10 +25,13 @@ public class TweetService {
 
     private UserRepository userRepository;
 
+    private HashtagRepository hashtagRepository;
+
     @Autowired
-    public TweetService(TweetRepository tweetRepository, UserRepository userRepository) {
+    public TweetService(TweetRepository tweetRepository, UserRepository userRepository, HashtagRepository hashtagRepository) {
         this.tweetRepository = tweetRepository;
         this.userRepository = userRepository;
+        this.hashtagRepository = hashtagRepository;
     }
 
     public static User getCurrentLoggedInUser() {
@@ -139,9 +146,37 @@ public class TweetService {
 
     /**
      * Return current user's tweets
+     *
      * @return a list of tweet sorted by created_at desc
      */
     public List<Tweet> getMyTweets() {
         return tweetRepository.findAllByUserIdOrderByCreatedAtDesc(getCurrentLoggedInUser().getId());
+    }
+
+
+    /**
+     * Adds a hashtag to the tweet with the given ID.
+     * If the addedHashtag does not exist, save it to database
+     * @param tweetId      the ID of the tweet to which the hashtag will be added
+     * @param addedHashtag the hashtag to be added to the tweet
+     * @return the updated tweet object
+     * @throws InformationNotFoundException if the current user does not have a tweet with the given ID
+     * @throws InformationExistException    if the tweet already has the given hashtag
+     * @throws InformationInvalidException if the name of addedHashtag is blank
+     */
+    public Tweet addHashtag(Long tweetId, Hashtag addedHashtag) {
+        Tweet tweet = tweetRepository.findByIdAndUserId(tweetId, getCurrentLoggedInUser().getId())
+                .orElseThrow(() -> new InformationNotFoundException("You don't have any tweet with id " + tweetId));
+        if (addedHashtag.getName().isBlank() || !addedHashtag.getName().startsWith("#"))
+            throw new InformationInvalidException("Hashtag can not be empty or only contains space character");
+        Optional<Hashtag> existingHashtag = hashtagRepository.findHashtagByName(addedHashtag.getName());
+        if (existingHashtag.isPresent()) {
+            if (tweet.getHashtags().contains(existingHashtag.get())) {
+                throw new InformationExistException("Tweet with the id " + tweetId + " already has the hashtag " + addedHashtag.getName());
+            }
+        } else {
+            tweet.getHashtags().add(addedHashtag);
+        }
+        return tweetRepository.save(tweet);
     }
 }

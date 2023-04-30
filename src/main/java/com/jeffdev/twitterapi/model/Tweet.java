@@ -33,7 +33,8 @@ public class Tweet {
     @LastModifiedDate
     private Instant updatedAt;
 
-    @Column()
+    @Column
+    @JsonProperty("parent_id")
     private long parentId;
 
     @ManyToOne

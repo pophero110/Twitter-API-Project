@@ -6,6 +6,7 @@
 - [Technologies](#technologies) 
 - [Project Dependencies](#project-dependencies)
 - [Project Management](#project-management)
+- [Entity Relationship Diagram]()
 - [API Reference](#api-reference)
   - [Postman Workspace](#postman-workspace)
 - [Wins](#wins)
@@ -56,6 +57,13 @@
 - [Thread Management](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26834733)
 - [Hashtag Management](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26852063)
 
+# [Entity Relationship Diagram](https://drive.google.com/file/d/1KQNFfVow5GVSpBJ-qKArLaxjQkaPVNiU/view?usp=sharing)
+## User and Profile
+![user-profile-ERD](./resources/user-profile-ERD.png)
+## User, Tweet and Thread
+![user-tweet-thread-ERD](./resources/user-tweet-thread-ERD.png)
+## Tweet and Hastag
+![tweet-hashtag-ERD](./resources/tweet-hashtag-ERD.png)
 # API Reference
 ## User
 

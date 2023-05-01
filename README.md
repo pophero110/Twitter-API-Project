@@ -129,6 +129,6 @@
 - **An [article](https://www.developer.com/java/java-record-class/#:~:text=Record%20is%20a%20special%20purpose,added%20into%20the%20Java%20language) that explains what is Record class and how to use it
   - *A record is a new type of class introduced in Java 16 that is designed to represent simple, immutable data containers. Records provide a concise way to declare classes that are primarily used to store data, by eliminating boilerplate code that is typically required in traditional Java classes such as constructors, getters, and equals/hashCode implementations.* **Used on [LoginResponse](https://github.com/pophero110/Twitter-REST-API/commit/f4d60683c5305aa8c2f692c23823fb70bee79eb8) class**
 
-- **An [article](https://www.bezkoder.com/jpa-many-to-many/)** that explains how to implement a many-to-many relationship and create operation
+- **An [article](https://www.bezkoder.com/jpa-many-to-many/)** that explains how to implement a many-to-many relationship and create operation. Used on Tweet and Hashtag tables
 
 - The **Code Inspection** feature in IntelliJ saved me a lot of time in refactoring the code

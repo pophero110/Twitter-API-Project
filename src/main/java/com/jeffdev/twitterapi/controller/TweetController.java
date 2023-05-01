@@ -6,6 +6,8 @@ import com.jeffdev.twitterapi.model.Tweet;
 import com.jeffdev.twitterapi.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +28,7 @@ public class TweetController {
      * @return The newly created tweet object
      */
     @PostMapping(path = "")
-    public Tweet createTweet(@RequestBody Tweet tweetObject) {
+    public Tweet createTweet(@Valid @RequestBody Tweet tweetObject) {
         return tweetService.createTweet(tweetObject);
     }
 
@@ -43,7 +45,7 @@ public class TweetController {
      * @return updated tweet
      */
     @PutMapping(path = "/{tweetId}")
-    public Tweet updateTweet(@PathVariable Long tweetId, @RequestBody Tweet tweetObject) {
+    public Tweet updateTweet(@PathVariable Long tweetId, @Valid @RequestBody Tweet tweetObject) {
         return tweetService.updateTweet(tweetId, tweetObject);
     }
 
@@ -94,18 +96,20 @@ public class TweetController {
 
     /**
      * Adds a hashtag to the specified tweet.
+     *
      * @param tweetId the ID of the tweet to add the hashtag to
      * @param hashtag the hashtag to add
      * @return the updated tweet with the added hashtag
      */
     @PostMapping("/{tweetId}/hashtags")
-    public Tweet addHashTag(@PathVariable Long tweetId, @RequestBody Hashtag hashtag) {
+    public Tweet addHashTag(@PathVariable Long tweetId, @Valid @RequestBody Hashtag hashtag) {
         return tweetService.addHashtag(tweetId, hashtag);
     }
 
 
     /**
      * Take a hashtags query param and return a list of tweets that related to the hashtags
+     *
      * @param hashtags the hashtag query param
      * @return a list of tweets that related to the hashtags
      */

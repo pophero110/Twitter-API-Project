@@ -6,6 +6,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +22,7 @@ public class Tweet {
 
     // Source: https://www.objectdb.com/api/java/jpa/Column
     @Column(nullable = false, length = 280)
+    @NotBlank
     private String content;
 
 

@@ -5,6 +5,8 @@ import com.jeffdev.twitterapi.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(path = "/api/profiles")
 public class ProfileController {
@@ -23,7 +25,7 @@ public class ProfileController {
      * @return created profile
      */
     @PostMapping("")
-    public Profile createProfile(@RequestBody Profile profileObject) {
+    public Profile createProfile(@Valid @RequestBody Profile profileObject) {
         return profileService.createProfile(profileObject);
     }
 
@@ -34,7 +36,7 @@ public class ProfileController {
      * @return updated profile
      */
     @PutMapping("")
-    public Profile updateProfile(@RequestBody Profile profileObject) {
+    public Profile updateProfile(@Valid @RequestBody Profile profileObject) {
         return profileService.updateProfile(profileObject);
     }
 

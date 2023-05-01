@@ -6,6 +6,7 @@ import com.jeffdev.twitterapi.service.ThreadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class ThreadController {
     }
 
     @PostMapping("/tweets/{tweetId}")
-    public Tweet reply(@PathVariable Long tweetId, @RequestBody Tweet tweetObject) {
+    public Tweet reply(@PathVariable Long tweetId, @Valid @RequestBody Tweet tweetObject) {
         return threadService.createThreadTweet(tweetId, tweetObject);
     }
 

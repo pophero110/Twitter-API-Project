@@ -3,8 +3,7 @@ package com.jeffdev.twitterapi.service;
 import com.jeffdev.twitterapi.exception.InformationExistException;
 import com.jeffdev.twitterapi.exception.InformationInvalidException;
 import com.jeffdev.twitterapi.model.User;
-import com.jeffdev.twitterapi.model.request.LoginRequest;
-import com.jeffdev.twitterapi.model.request.RegisterRequest;
+import com.jeffdev.twitterapi.model.request.UserRequest;
 import com.jeffdev.twitterapi.model.response.LoginResponse;
 import com.jeffdev.twitterapi.repository.UserRepository;
 import com.jeffdev.twitterapi.security.JWTUtils;
@@ -45,20 +44,20 @@ public class UserService {
     /**
      * create a user with a unique email and non-blank password
      *
-     * @param registerRequest the object that contains the email and password
+     * @param userRequest the object that contains the email and password
      * @return created user
      * @throws InformationExistException if the email is already existed
      * @throws InformationInvalidException if the password is blank
      */
-    public User createUser(RegisterRequest registerRequest) {
-        Optional<User> user = userRepository.findUserByEmailAddress(registerRequest.getEmail());
+    public User createUser(UserRequest userRequest) {
+        Optional<User> user = userRepository.findUserByEmailAddress(userRequest.getEmail());
         if (user.isPresent()) {
-            throw new InformationExistException("The email address " + registerRequest.getEmail() + " is already existed");
+            throw new InformationExistException("The email address " + userRequest.getEmail() + " is already existed");
         } else {
-            if (registerRequest.getPassword().isBlank()) {
+            if (userRequest.getPassword().isBlank()) {
                 throw new InformationInvalidException("Password can not be empty or only contains space character");
             } else {
-                User newUser = new User(null,registerRequest.getEmail(), passwordEncoder.encode(registerRequest.getPassword()));
+                User newUser = new User(null,userRequest.getEmail(), passwordEncoder.encode(userRequest.getPassword()));
                 return userRepository.save(newUser);
             }
         }
@@ -75,13 +74,13 @@ public class UserService {
 
     /**
      * authenticate a user by email and password
-     * @param loginRequest contains the email and password of the user
+     * @param userRequest contains the email and password of the user
      * @return JWT
      */
-    public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
+    public ResponseEntity<?> loginUser(UserRequest userRequest) {
         try {
             Authentication authentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+                    .authenticate(new UsernamePasswordAuthenticationToken(userRequest.getEmail(), userRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             myUserDetails = (MyUserDetails) authentication.getPrincipal();
             final String JWT = jwtUtils.generateJwtToken(myUserDetails);

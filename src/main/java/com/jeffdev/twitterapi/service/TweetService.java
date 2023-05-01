@@ -189,7 +189,7 @@ public class TweetService {
     public List<Tweet> searchTweetByHashtags(List<String> hashtags) {
         List<Tweet> tweets = new ArrayList<>();
         hashtags.forEach(hashtagName -> {
-            Optional<Hashtag> hashtag = hashtagRepository.findHashtagByName(hashtagName);
+            Optional<Hashtag> hashtag = hashtagRepository.findHashtagByName("#" + hashtagName);
             hashtag.ifPresent(value -> tweets.addAll(tweetRepository.findByHashtagsId(value.getId())));
         });
         // sort the tweets by created_at in descending order

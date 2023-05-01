@@ -1,8 +1,10 @@
 package com.jeffdev.twitterapi.exception;
 
+import com.jeffdev.twitterapi.model.response.ErrorResponse;
 import com.jeffdev.twitterapi.model.response.ValidationErrorResponse;
 import com.jeffdev.twitterapi.model.violation.Violation;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -40,5 +42,21 @@ public class GlobalExceptionHandler {
                     new Violation(fieldError.getField(), fieldError.getDefaultMessage()));
         }
         return error;
+    }
+
+    @ExceptionHandler(InformationNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    ErrorResponse onInformationNotFoundException(
+            InformationNotFoundException e) {
+        return new ErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler(InformationExistException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    ErrorResponse onInformationExistException(
+            InformationExistException e) {
+        return new ErrorResponse(e.getMessage());
     }
 }

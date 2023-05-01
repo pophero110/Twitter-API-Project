@@ -6,6 +6,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +23,9 @@ public class Hashtag {
     private Long id;
 
     @Column(unique = true)
+    @NotBlank
+    @Size(min = 2, message = "Hashtag can not be empty")
+    @Pattern(regexp = "^#.*", message = "Hashtag must start with '#'")
     private String name;
 
     @CreatedDate

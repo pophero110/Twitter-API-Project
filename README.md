@@ -10,7 +10,7 @@
 - [API Reference](#api-reference)
   - [Postman Workspace](#postman-workspace)
 - [Wins](#wins)
-- [Improvement Ideas during development](#improvement-ideas-during-development)
+- [Improvement Ideas](#improvement-ideas)
 - [Credits](#credits)
 
 # Technologies
@@ -135,7 +135,8 @@ always test the code of the current task before moving on to the next task
 ### Learn two ways of implement a many-to-many relationship in Spring Boot
 - many-to-many annotation and a new entity or a composite key
 
-# Improvement Ideas During Development
+# Improvement Ideas
+- [Use new entity or a composite key to implement the many-to-many relationship between Tweet and Hashtag](./resources/how-to-add-property-to-join-table.md)
 - Validate user's input in Controller level
 - Optimize query performance such as users and tweets
 - Refactor getCurrentLoggedInUser

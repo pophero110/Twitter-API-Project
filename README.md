@@ -13,7 +13,7 @@
 - [Credits](#credits)
 
 # Technologies
-**GitHub Project**: resource management  
+**[GitHub Project](https://github.com/users/pophero110/projects/5)**: resource management  
 **IntelliJ**: development IDEA  
 **[Draw.io](https://drive.google.com/file/d/1KQNFfVow5GVSpBJ-qKArLaxjQkaPVNiU/view?usp=sharing)**: Create Entity Relationship Diagram  
 **[Postman](https://www.postman.com/jeffou-1/workspace/twitter-like-restful-api-web-application)**: APIs Testing and Documentation  

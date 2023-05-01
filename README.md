@@ -140,7 +140,7 @@ always test the code of the current task before moving on to the next task
 - [Use new entity or a composite key to implement the many-to-many relationship between Tweet and Hashtag](./resources/how-to-add-property-to-join-table.md)
 - Validate user's input in Controller level
 - Optimize query performance such as users and tweets
-- Refactor getCurrentLoggedInUser
+- DRY getCurrentLoggedInUser method
 - Refactor code using Intellij Code Inspection
 - Implement APIs automated testing
 

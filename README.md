@@ -154,7 +154,7 @@ always test the code of the current task before moving on to the next task
 - **An [article](https://www.baeldung.com/java-jsonignore-vs-transient) that explains what is @JsonIgnore annotation**
   - *We use the @JsonIgnore annotation to specify a method or field that should be ignored during serialization and deserialization processes. This marker annotation belongs to the Jackson library.*
 
-- **An [article](https://www.developer.com/java/java-record-class/#:~:text=Record%20is%20a%20special%20purpose,added%20into%20the%20Java%20language) that explains what is Record class and how to use it
+- **An [article](https://www.developer.com/java/java-record-class/#:~:text=Record%20is%20a%20special%20purpose,added%20into%20the%20Java%20language) that explains what is Record class and how to use it**
   - *A record is a new type of class introduced in Java 16 that is designed to represent simple, immutable data containers. Records provide a concise way to declare classes that are primarily used to store data, by eliminating boilerplate code that is typically required in traditional Java classes such as constructors, getters, and equals/hashCode implementations.* **Used on [LoginResponse](https://github.com/pophero110/Twitter-REST-API/commit/f4d60683c5305aa8c2f692c23823fb70bee79eb8) class**
 
 - **An [article](https://www.bezkoder.com/jpa-many-to-many/)** that explains how to implement a many-to-many relationship and create operation. Used on Tweet and Hashtag tables

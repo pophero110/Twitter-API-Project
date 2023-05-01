@@ -126,8 +126,8 @@ always test the code of the current task before moving on to the next task
 ![postman-screenshot](./resources/postman-screenshot.png)
 # Wins
 ### Learn new ways to refactor code
-- Refactor LonginResponse class with Record class
-- Refactor If-Else statement with Optional orElseThrow and ifPresent method
+- Refactor [LonginResponse](src/main/java/com/jeffdev/twitterapi/model/response/LoginResponse.java) class with Record class
+- Refactor If-Else statement with Optional [orElseThrow](https://github.com/pophero110/Twitter-API-Project/blob/66967c43bb353159a666398d24e91f9727f6f3b3/src/main/java/com/jeffdev/twitterapi/service/TweetService.java#L173) and [ifPresent](https://github.com/pophero110/Twitter-API-Project/blob/66967c43bb353159a666398d24e91f9727f6f3b3/src/main/java/com/jeffdev/twitterapi/service/TweetService.java#L198) method
 - Use [@ControllerAdvice](./src/main/java/com/jeffdev/twitterapi/exception/GlobalExceptionHandler.java) to handle exceptions from controllers
 ### Learn how to use GitHub Project to manage resource
 ![spring-board](./resources/spring-board.png)

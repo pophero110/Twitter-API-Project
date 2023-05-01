@@ -143,6 +143,7 @@ always test the code of the current task before moving on to the next task
 - DRY getCurrentLoggedInUser method
 - Refactor code using Intellij Code Inspection
 - Implement APIs automated testing
+- Add a [pull request template](resources/pull-request-template.md) to make it easier to include information that helps understand the changes made in the pull request
 
 # Credits
 

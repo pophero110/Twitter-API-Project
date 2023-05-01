@@ -7,6 +7,7 @@
 - [Project Dependencies](#project-dependencies)
 - [Project Management](#project-management)
 - [API Reference](#api-reference)
+  - [Postman Workspace](#postman-workspace)
 - [Wins](#wins)
 - [Improvement Ideas during development](#improvement-ideas-during-development)
 - [Credits](#credits)
@@ -95,7 +96,7 @@
 | POST         | /api/tweets/tweetId/hashtags | Add a hashtag to a tweet | Private | { hashtagName } |
 | GET          | /api/tweets/search?hashtags= | Get tweets by hashtags   | Private |                 |
 | GET          | /api/hashtags/trending       | Get trending hashtags    | Private |                 |
-## From Postman Workspace ([shared link](https://www.postman.com/jeffou-1/workspace/twitter-like-restful-api-web-application))
+## [Postman Workspace](https://www.postman.com/jeffou-1/workspace/twitter-like-restful-api-web-application)
 ![postman-screenshot](./resources/postman-screenshot.png)
 # Wins
 ### Learn new ways to refactor code

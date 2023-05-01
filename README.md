@@ -132,8 +132,9 @@ always test the code of the current task before moving on to the next task
 ### Learn how to use GitHub Project to manage resource
 ![spring-board](./resources/spring-board.png)
 ![planning](./resources/planning.png)
-### Learn two ways of implement a many-to-many relationship in Spring Boot
-- many-to-many annotation and a new entity or a composite key
+### Learn two ways to implement a many-to-many relationship in Spring Boot
+- via many-to-many annotation
+- via using a new entity or a composite key
 
 # Improvement Ideas
 - [Use new entity or a composite key to implement the many-to-many relationship between Tweet and Hashtag](./resources/how-to-add-property-to-join-table.md)

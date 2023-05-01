@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+/**
+ * Service class that handles hashtag-related operations.
+ */
 @Service
 public class HashtagService {
     private HashtagRepository hashtagRepository;

@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class that handles thread-related operations.
+ */
 @Service
 public class ThreadService {
     private ThreadRepository threadRepository;

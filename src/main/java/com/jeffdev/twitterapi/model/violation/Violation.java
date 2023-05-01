@@ -1,5 +1,8 @@
 package com.jeffdev.twitterapi.model.violation;
 
+/**
+ * A class representing a validation error message for a specific field.
+ */
 public class Violation {
 
     private final String fieldName;

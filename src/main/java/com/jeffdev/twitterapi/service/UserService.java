@@ -20,6 +20,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Service class that handles user-related operations.
+ */
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -46,7 +49,7 @@ public class UserService {
      *
      * @param userRequest the object that contains the email and password
      * @return created user
-     * @throws InformationExistException if the email is already existed
+     * @throws InformationExistException   if the email is already existed
      * @throws InformationInvalidException if the password is blank
      */
     public User createUser(UserRequest userRequest) {
@@ -57,7 +60,7 @@ public class UserService {
             if (userRequest.getPassword().isBlank()) {
                 throw new InformationInvalidException("Password can not be empty or only contains space character");
             } else {
-                User newUser = new User(null,userRequest.getEmail(), passwordEncoder.encode(userRequest.getPassword()));
+                User newUser = new User(null, userRequest.getEmail(), passwordEncoder.encode(userRequest.getPassword()));
                 return userRepository.save(newUser);
             }
         }
@@ -65,6 +68,7 @@ public class UserService {
 
     /**
      * find a user by an email address
+     *
      * @param email the email dress used to find the user
      * @return found user
      */
@@ -74,6 +78,7 @@ public class UserService {
 
     /**
      * authenticate a user by email and password
+     *
      * @param userRequest contains the email and password of the user
      * @return JWT
      */

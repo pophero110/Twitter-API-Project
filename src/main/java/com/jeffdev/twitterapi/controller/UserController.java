@@ -30,6 +30,11 @@ public class UserController {
         return userService.createUser(userRequest);
     }
 
+    /**
+     * Check user's credentials and return a JWT if the credentials is correct
+     * @param userRequest the object that contains the email and password
+     * @return a JWT
+     */
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@Valid @RequestBody UserRequest userRequest) {
         return userService.loginUser(userRequest);

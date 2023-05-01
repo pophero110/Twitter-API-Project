@@ -20,11 +20,22 @@ public class ThreadController {
         this.threadService = threadService;
     }
 
+    /**
+     * Create a new tweet that is used to reply to other tweet
+     * @param tweetId the id of the tweet that reply to
+     * @param tweetObject the tweet used for replying
+     * @return created tweet
+     */
     @PostMapping("/tweets/{tweetId}")
     public Tweet reply(@PathVariable Long tweetId, @Valid @RequestBody Tweet tweetObject) {
         return threadService.createThreadTweet(tweetId, tweetObject);
     }
 
+    /**
+     * Get a list of tweets that belongs to a thread
+     * @param threadId the id the threads
+     * @return a list of tweets
+     */
     @GetMapping("/{threadId}")
     public List<Tweet> getTweets(@PathVariable Long threadId) {
         return threadService.getTweetsByThreadId(threadId);

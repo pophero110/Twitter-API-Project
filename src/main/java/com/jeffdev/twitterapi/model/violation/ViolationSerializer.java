@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
 
+/**
+ * A custom serializer for converting a Violation object to JSON format.
+ */
 public class ViolationSerializer extends JsonSerializer<Violation> {
 
     @Override

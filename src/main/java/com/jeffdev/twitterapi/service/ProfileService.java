@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+
+/**
+ * Service class that handles profile-related operations.
+ */
 @Service
 public class ProfileService {
     private ProfileRepository profileRepository;

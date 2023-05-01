@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Tweet class that handles tweet-related operations.
+ */
 @Service
 public class TweetService {
 
@@ -157,12 +160,13 @@ public class TweetService {
     /**
      * Adds a hashtag to the tweet with the given ID.
      * If the addedHashtag does not exist, save it to database
+     *
      * @param tweetId      the ID of the tweet to which the hashtag will be added
      * @param addedHashtag the hashtag to be added to the tweet
      * @return the updated tweet object
      * @throws InformationNotFoundException if the current user does not have a tweet with the given ID
      * @throws InformationExistException    if the tweet already has the given hashtag
-     * @throws InformationInvalidException if the name of addedHashtag is blank
+     * @throws InformationInvalidException  if the name of addedHashtag is blank
      */
     public Tweet addHashtag(Long tweetId, Hashtag addedHashtag) {
         Tweet tweet = tweetRepository.findByIdAndUserId(tweetId, getCurrentLoggedInUser().getId())
@@ -183,6 +187,7 @@ public class TweetService {
 
     /**
      * Return a list of tweets that related to the given list of hashtags
+     *
      * @param hashtags A list of hashtags
      * @return a list of tweets or an empty list
      */

@@ -4,7 +4,6 @@ import com.jeffdev.twitterapi.model.response.ErrorResponse;
 import com.jeffdev.twitterapi.model.response.ValidationErrorResponse;
 import com.jeffdev.twitterapi.model.violation.Violation;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,9 +14,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+
+/**
+ * This class serves as a global exception handler for the entire application.
+ * It contains methods to handle different types of exceptions and return appropriate responses.
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * Handles ConstraintViolationException and returns a ValidationErrorResponse.
+     *
+     * @param e the ConstraintViolationException object to be handled
+     * @return a ValidationErrorResponse object containing the details of the validation errors
+     */
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -31,6 +41,12 @@ public class GlobalExceptionHandler {
         return error;
     }
 
+    /**
+     * Handles MethodArgumentNotValidException and returns a ValidationErrorResponse.
+     *
+     * @param e the MethodArgumentNotValidException object to be handled
+     * @return a ValidationErrorResponse object containing the details of the validation errors
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -44,6 +60,12 @@ public class GlobalExceptionHandler {
         return error;
     }
 
+    /**
+     * Handles InformationNotFoundException and returns an ErrorResponse.
+     *
+     * @param e the InformationNotFoundException object to be handled
+     * @return an ErrorResponse object containing the error message
+     */
     @ExceptionHandler(InformationNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
@@ -52,6 +74,12 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(e.getMessage());
     }
 
+    /**
+     * Handles InformationExistException and returns an ErrorResponse.
+     *
+     * @param e the InformationExistException object to be handled
+     * @return an ErrorResponse object containing the error message
+     */
     @ExceptionHandler(InformationExistException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     @ResponseBody

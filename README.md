@@ -6,7 +6,7 @@
 - [Technologies](#technologies) 
 - [Project Dependencies](#project-dependencies)
 - [Project Management](#project-management)
-- [Entity Relationship Diagram]()
+- [Entity Relationship Diagram](#entity-relationship-diagram)
 - [API Reference](#api-reference)
   - [Postman Workspace](#postman-workspace)
 - [Wins](#wins)

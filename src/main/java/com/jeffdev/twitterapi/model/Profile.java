@@ -3,6 +3,7 @@ package com.jeffdev.twitterapi.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "profiles")
@@ -13,6 +14,7 @@ public class Profile {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank
     private String name;
 
     @Column

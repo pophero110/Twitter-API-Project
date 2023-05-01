@@ -7,7 +7,7 @@
 - [Project Dependencies](#project-dependencies)
 - [Project Management](#project-management)
 - [API Reference](#api-reference)
-- [Hurdle & Win](#hurdle-and-win)
+- [Wins](#wins)
 - [Improvement Ideas during development](#improvement-ideas-during-development)
 - [Credits](#credits)
 
@@ -87,12 +87,16 @@
 | GET          | /api/tweets/search?hashtags= | Get tweets by hashtags   | Private |                 |
 | GET          | /api/hashtags/trending       | Get trending hashtags    | Private |                 |
 
-# Hurdle and Win
-## Wins
+# Wins
 ### Learn new ways to refactor code
 - Refactor LonginResponse class with Record class
 - Refactor If-Else statement with Optional orElseThrow and ifPresent method
+- Use [@ControllerAdvice](./src/main/java/com/jeffdev/twitterapi/exception/GlobalExceptionHandler.java) to handle exceptions from controllers
 ### Learn how to use GitHub Project to manage resource
+![spring-board](./resources/spring-board.png)
+![planning](./resources/planning.png)
+### Learn two ways of implement a many-to-many relationship in Spring Boot
+- many-to-many annotation and a new entity or a composite key
 
 # Improvement Ideas During Development
 - Validate user's input in Controller level

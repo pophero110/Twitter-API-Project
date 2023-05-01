@@ -14,8 +14,8 @@
 # Technologies
 **GitHub Project**: resource management  
 **IntelliJ**: development IDEA  
-**Draw.io**: Create Entity Relationship Diagram  
-**Postman**: APIs Testing and Documentation  
+**[Draw.io](https://drive.google.com/file/d/1KQNFfVow5GVSpBJ-qKArLaxjQkaPVNiU/view?usp=sharing)**: Create Entity Relationship Diagram  
+**[Postman](https://www.postman.com/jeffou-1/workspace/twitter-like-restful-api-web-application)**: APIs Testing and Documentation  
 **PgAdmin 4**: PostgresSQL GUI  
 **Sourcetree**: Git GUI  
 
@@ -95,7 +95,7 @@
 ### Learn how to use GitHub Project to manage resource
 
 # Improvement Ideas During Development
-- Validator interface for validating user's input such as tweet, hashtag etc.
+- Validate user's input in Controller level
 - Optimize query performance such as users and tweets
 - Refactor getCurrentLoggedInUser
 - Refactor code using Intellij Code Inspection

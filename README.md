@@ -42,12 +42,30 @@
 # Project Management
 
 ## [Brainstorm](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26910994)
-1. **Determine what kind of application I want to build**
-2. **Identify the entities that are relevant to the domain**
-3. **Use ERD to visualize the relationship between the entities and include the attributes associated with each entity**
-4. **Design RESTful APIs**
-5. **Create user stories**
-6. **Determine Development Process**
+1. **Determine what kind of application I want to build**  
+   I decide to build a Twitter-like RESTful API web application for two main reasons. Firstly, I do not build or design a social media platform application before, and I would like to challenge myself in this area. Secondly, I want to learn how to implement a many-to-many relationship with Spring Data JPA and PostgreSQL, which is a common feature in Twitter. By building this application, I hope to gain practical experience and enhance my skills in these areas.
+2. **Identify the entities that are relevant to the domain**  
+   User: A user who creates an account and can post tweets.  
+   UserProfile: A profile associated with a user account, which can include personal information.  
+   Tweet: A message posted by a user.  
+   Thread: A conversation consisting of multiple tweets that are linked together.  
+   Hashtag: A keyword or phrase preceded by the # symbol used to group together tweets on a specific topic.  
+3. **Use ERD to visualize the relationship between the entities and include the attributes associated with each entity**  
+   use correct cardinality symbols  
+   ![cardinality-symbols](./resources/Cardinality-Symbols-Database.webp)
+4. **Design RESTful APIs**  
+    [What is A RESTful API article](https://aws.amazon.com/what-is/restful-api/#:~:text=RESTful%20API%20is%20an%20interface,applications%20to%20perform%20various%20tasks.)
+5. **Create user stories**  
+    User story structure  
+    ![user-story-structure](./resources/user-story-structure.png)  
+   Acceptance Criteria  
+   can also be written as bullets to describe the actual behaviors and functions a user would see to get to the desired outcome. While slightly more technical, the functions they describe are the mechanics a user should see and experience, not what a development team should build.
+6. **Development Process**  
+create a branch for each ticket  
+write descriptive commit messages  
+commit only relevant changes to the current task.  
+commit often and early  
+always test the code of the current task before moving on to the next task  
 ## [Planning](https://github.com/users/pophero110/projects/5/views/5)
 *User stories order by priority*
 - [Tweet Management](https://github.com/users/pophero110/projects/5/views/2?pane=issue&itemId=26852053)

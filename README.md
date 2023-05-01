@@ -20,13 +20,22 @@
 **Sourcetree**: Git GUI  
 
 # Project Dependencies
-- spring-boot-starter-web: for building web applications using Spring MVC.
-- spring-boot-starter-data-jpa: for using Spring Data JPA with Hibernate as the underlying implementation.
-- postgresql: for working with PostgresSQL databases.
-- spring-boot-starter-security: for securing web applications using Spring Security.
-- jjwt-api: for creating and parsing JSON Web Tokens (JWTs).
-- jjwt-impl: implementation of JSON Web Tokens (JWTs).
-- jjwt-jackson: for handling JSON serialization and deserialization of JWTs.
+- spring-boot-starter-web
+  - for building web applications using Spring MVC
+- spring-boot-starter-data-jpa
+  - for using Spring Data JPA with Hibernate as the underlying implementation.
+- postgresql
+  - for working with PostgresSQL databases.
+- spring-boot-starter-security
+  - for securing web applications using Spring Security.
+- jjwt-api
+  - for creating and parsing JSON Web Tokens (JWTs).
+- jjwt-impl
+  - implementation of JSON Web Tokens (JWTs).
+- jjwt-jackson
+  - for handling JSON serialization and deserialization of JWTs.
+- spring-boot-starter-validation
+  - provides support for Bean Validation API (JSR 380) and Hibernate Validator
 
 # Project Management
 
@@ -86,7 +95,8 @@
 | POST         | /api/tweets/tweetId/hashtags | Add a hashtag to a tweet | Private | { hashtagName } |
 | GET          | /api/tweets/search?hashtags= | Get tweets by hashtags   | Private |                 |
 | GET          | /api/hashtags/trending       | Get trending hashtags    | Private |                 |
-
+## From Postman
+![postman-screenshot](./resources/postman-screenshot.png)
 # Wins
 ### Learn new ways to refactor code
 - Refactor LonginResponse class with Record class
